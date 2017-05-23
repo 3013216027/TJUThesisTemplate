@@ -1,0 +1,16 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX root = ..\tjumain.tex
+
+\chapter{利用模拟退火算法求解八数码问题}
+
+\subsection{问题描述}
+八数码问题也称为九宫问题。在$3\times 3$的棋盘，摆有八个棋子，每个棋子上标有$1$至$8$的某一数字，不同棋子上标的数字不相同。棋盘上还有一个空格，与空格相邻的棋子可以移到空格中。要求解决的问题是：给出一个初始状态和一个目标状态，找出一种从初始转变成目标状态的移动棋子步数最少的移动步骤。
+所谓问题的一个状态就是棋子在棋盘上的一种摆法。棋子移动后，状态就会发生改变。解八数码问题实际上就是找出从初始状态到达目标状态所经过的一系列中间过渡状态，如图(\ref{fig:Eight})所示
+
+\begin{figure}[htbp]\label{fig:Eight}
+\centering
+%\subfigure[由~\LaTeX~系统生成的行内公式]{\label{fig:subfig:latex}
+                \includegraphics[width=0.55\textwidth]{Eight}
+\caption{八数码问题}
+\vspace{-1em}
+\end{figure}
