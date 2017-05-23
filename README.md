@@ -2,6 +2,7 @@
 
 美味源自[tjuthesis](https://code.google.com/archive/p/tjuthesis/)
 
+中文译文请移步分支[translation](//github.com/3013216027/TJUThesisTemplate/tree/translation)
 
 ### 环境
 
@@ -52,7 +53,5 @@
     + 封面的学校名称字样和校徽标志是是从学校官网抠下来，然后用[vectormagic](https://vectormagic.com/)生成的矢量图，相比原模板清晰度有所改善，你也可以在[这里](https://qyetfu.site/download/tju_logo.zip)可以下载到对应的ai原件，然后自行微调校名颜色等。
     + [ ] `package.tex`中有一些包比较古老，比如用于表格单元斜线分隔的`slashbox`，因为开源问题已经被剔除了，现在用的是`diagbox`。有空清理一遍。
 
-----
 
-中文译文请移步分支[translation](//github.com/3013216027/TJUThesisTemplate/tree/translation)
 
