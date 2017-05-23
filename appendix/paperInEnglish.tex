@@ -5,10 +5,21 @@
              {}             % 设置该选项为空是为了不让目录中显示页码
 \markboth{外文资料}{外文资料}
 \addcontentsline{toc}{chapter}{外文资料}
-\setcounter{page}{1}       % 如果需要从该页开始从 1 开始编页，则取消该注释
-% \chapter*{外文资料}
+% \setcounter{page}{1}       % 如果需要从该页开始从 1 开始编页，则取消该注释
+\chapter*{外文资料}
+\lhead{}
+\rhead{}
+\chead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
 
-% He K, Zhang X, Ren S, et al. Deep residual learning for image recognition[C]. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016: 770-778.
+\noindent
+{He K, Zhang X, Ren S, et al. Deep residual learning for image recognition[C]. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016: 770-778.}
+
+\thispagestyle{empty}
+\newpage
+
 \includepdf[pages={-},pagecommand={\pagestyle{plain}}]{appendix/resnet_en.pdf}
 
-% \thispagestyle{empty}
+

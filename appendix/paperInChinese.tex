@@ -7,12 +7,13 @@
 \setcounter{page}{1}            % 单独从 1 开始编页码
 \markboth{中文译文}{中文译文}   % 用于将章节号添加到页眉中
 % \chapter*{中文译文}
-
-% % 重置图、表、章节等计数器
-% \setcounter{figure}{0}
-% \setcounter{table}{0}
-% \setcounter{section}{0}
-% \renewcommand*\thesection{\arabic{section}}
+\fancypagestyle{plain}
+\lhead{}
+\rhead{}
+\chead{\song\wuhao 天津大学~2017~届本科生毕业论文}
+\lfoot{}
+\cfoot{\song\xiaowu ~\thepage~}
+\rfoot{}
 
 \includepdf[pages={-},pagecommand=\bgroup{\pagestyle{plain}}\egroup]{appendix/resnet_cn.pdf}
 
