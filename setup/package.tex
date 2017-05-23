@@ -83,7 +83,22 @@ rulesepcolor=\color{red!20!green!20!blue!20}
             ]{hyperref}
 \fi
 
-% 插入其它pdf
-\usepackage[final]{pdfpages}
-\setboolean{@twoside}{false}
-
+% tikz绘图，支持流程图、思维导图等
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,chains}
+% 设置颜色代号
+\colorlet{lcfree}{green}
+\colorlet{lcnorm}{blue}
+\colorlet{lccong}{red}
+% -------------------------------------------------
+% 设置调试标志层
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+% 标记坐标点的宏定义。交换下面两个定义关闭。
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  }
+\providecommand{\cmark}[2][]{\relax}
+% -------------------------------------------------

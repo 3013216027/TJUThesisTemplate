@@ -1,10 +1,9 @@
 # Your main tex file name
 ARTICLE=tjumain
 # The final PDF file name
-NAME=样例输出
+NAME=resnet_cn
 
 OS=$(shell uname -s)
-PDF_VIEWER=SumatraPDF
 
 default: build
 
@@ -18,22 +17,24 @@ endif
 
 build:
 	@xelatex ${ARTICLE}.tex
-	@bibtex ${ARTICLE}
+	@bibtex ${ARTICLE} || true
 	@xelatex ${ARTICLE}.tex
 	@xelatex ${ARTICLE}.tex
 	@echo "Build ${ARTICLE}.pdf...Done!"
-	@mv -v ${ARTICLE}.pdf "${NAME}_build`date +%y%m%d`.pdf"
+	@mv -v ${ARTICLE}.pdf "${NAME}.pdf"
 
 cleanAll: clean
 	@find . -name '${NAME}*pdf' -exec rm -v {} \;
 
 run:
-	@open "`find . -name '${NAME}*pdf'`" > /dev/null 2>&1 &
+	@SumatraPDF "${NAME}.pdf" > /dev/null 2>&1 &
 
 touch:
 	@touch ${NAME}.pdf
 	@echo 'Done.'
 
 test:
-	${PDF_VIEWER} "`find . -name '${NAME}*pdf'`" > /dev/null 2>&1 &
+	@xelatex ${ARTICLE}.tex
+	@echo "Build ${ARTICLE}.pdf...Done!"
+	@mv -v ${ARTICLE}.pdf "${NAME}.pdf"
 
