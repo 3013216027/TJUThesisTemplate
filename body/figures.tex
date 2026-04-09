@@ -138,13 +138,20 @@ minipage环境的必选参数用来设置小页的宽度，若需要在一行中
 
 \section{具有子图的图片插入方法}
 
-图中若含有子图时，需要调用~subfigure~宏包, 如图~\ref{fig:subfig}~所示。
+图中若含有子图时，需要调用~subcaption~宏包, 如图~\ref{fig:subfig}~所示。
 \begin{figure}[htbp]
   \centering
-  \subfigure[Data Dimensions]{\label{fig:subfig:datadim}
-                \includegraphics[width=0.4\textwidth]{dataDimensions}}
-  \subfigure[Data Size]{\label{fig:subfig:datasize}
-                \includegraphics[width=0.4\textwidth]{dataSize}}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{dataDimensions}
+    \caption{Data Dimensions}\label{fig:subfig:datadim}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{dataSize}
+    \caption{Data Size}\label{fig:subfig:datasize}
+  \end{subfigure}
   \caption{Scalability of data}\label{fig:subfig}
 \vspace{\baselineskip}
 \end{figure}
@@ -155,12 +162,19 @@ minipage环境的必选参数用来设置小页的宽度，若需要在一行中
 \begin{verbatim}
 \begin{figure}[htbp]
   \centering
-  \subfigure[第1个子图标题]{
-            \label{第1个子图标签(通常为 fig:subfig1:subsubfig1)}
-            \includegraphics[width=0.4\textwidth]{文件名}}
-  \subfigure[第2个子图标题]{
-            \label{第2个子图标签(通常为 fig:subfig1:subsubfig2)}
-            \includegraphics[width=0.4\textwidth]{文件名}}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{文件名}
+    \caption{第1个子图标题}
+    \label{第1个子图标签(通常为 fig:subfig1:subsubfig1)}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{文件名}
+    \caption{第2个子图标题}
+    \label{第2个子图标签(通常为 fig:subfig1:subsubfig2)}
+  \end{subfigure}
   \caption{总标题}\label{总标签(通常为 fig:subfig1)}
 \vspace{\baselineskip}
 \end{figure}
