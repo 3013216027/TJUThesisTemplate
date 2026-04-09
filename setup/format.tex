@@ -51,7 +51,7 @@
 % 其它宏
 \newcommand{\todo}[1]{\textcolor{red}{\{TODO:#1\}}}  % \todo{} 生成红色字体的“TODO: ”，方便编写草稿时打标记。
 \newcommand*{\ldash}[0]{\raisebox{0.5mm}{\,-----\,}}  % 破折号
-\newlength{\wordsep}                                   % 公式注释后与正文的间距
+\newlength{\wordsep}                                   % 公式注释后与正文的间距（用于 tabularx 注释表格后，如 tables.tex 中的 \vspace{\wordsep}）
 \setlength{\wordsep}{\baselineskip}
 
 % 算法环境
