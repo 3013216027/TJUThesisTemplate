@@ -17,17 +17,52 @@
 \newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}                % 小五，单倍行距
 \newcommand{\liuhao}{\fontsize{7.5pt}{7.5pt}\selectfont}            % 六号，单倍行距
 % 如果需要添加新的字体定义，使用fc-list( :lang=zh-cn)可列出系统所有(中文)字体及对应名称
-\newCJKfontfamily[song]\song{Adobe Song Std}
-\newCJKfontfamily[fangsong]\fs{Adobe Fangsong Std}
-\newCJKfontfamily[hei]\hei{Adobe Heiti Std}
-\newCJKfontfamily[kai]\kai{Adobe Kaiti Std}
-% 其它字体定义
-\setCJKmainfont{Adobe Song Std}   % 中文衬线，正文主要字体
-\setCJKsansfont{Adobe Heiti Std}  % 中文无衬线，影响\sffamily和\textsf
-\setCJKmonofont{Adobe Fangsong Std} % 中文等宽，影响\ttfamily和\texttt
-\setmainfont{Times New Roman}     % 英文衬线
-\setsansfont{Arial}               % 英文无衬线，影响\sffamily和\textsf
-\setmonofont{Courier New}         % 英文等宽，影响\ttfamily和\texttt
+% 跨平台字体回退：优先使用 Adobe 中文字体，不存在时回退到 TeX Live 自带的 Fandol 字体
+\IfFontExistsTF{Adobe Song Std}{
+  \newCJKfontfamily[song]\song{Adobe Song Std}
+  \setCJKmainfont{Adobe Song Std}
+}{
+  \newCJKfontfamily[song]\song{FandolSong}
+  \setCJKmainfont{FandolSong}     % TeX Live 自带宋体
+}
+\IfFontExistsTF{Adobe Fangsong Std}{
+  \newCJKfontfamily[fangsong]\fs{Adobe Fangsong Std}
+}{
+  \newCJKfontfamily[fangsong]\fs{FandolFang} % TeX Live 自带仿宋
+}
+\IfFontExistsTF{Adobe Heiti Std}{
+  \newCJKfontfamily[hei]\hei{Adobe Heiti Std}
+  \setCJKsansfont{Adobe Heiti Std}
+}{
+  \newCJKfontfamily[hei]\hei{FandolHei}
+  \setCJKsansfont{FandolHei}      % TeX Live 自带黑体
+}
+\IfFontExistsTF{Adobe Kaiti Std}{
+  \newCJKfontfamily[kai]\kai{Adobe Kaiti Std}
+}{
+  \newCJKfontfamily[kai]\kai{FandolKai} % TeX Live 自带楷体
+}
+\IfFontExistsTF{Adobe Fangsong Std}{
+  \setCJKmonofont{Adobe Fangsong Std}
+}{
+  \setCJKmonofont{FandolFang}     % TeX Live 自带仿宋
+}
+% 英文字体回退：优先使用系统字体，不存在时回退到 TeX Live 自带的 TeX Gyre 字体
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}   % 英文衬线
+}{
+  \setmainfont{TeX Gyre Termes}   % TeX Live 自带，兼容 Times New Roman
+}
+\IfFontExistsTF{Arial}{
+  \setsansfont{Arial}             % 英文无衬线
+}{
+  \setsansfont{TeX Gyre Heros}    % TeX Live 自带，兼容 Helvetica/Arial
+}
+\IfFontExistsTF{Courier New}{
+  \setmonofont{Courier New}       % 英文等宽
+}{
+  \setmonofont{TeX Gyre Cursor}   % TeX Live 自带，兼容 Courier
+}
 
 % \newcommand{\nocontentsline}[3]{}
 % \newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
