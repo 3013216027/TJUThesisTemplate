@@ -27,8 +27,10 @@
 }
 \IfFontExistsTF{Adobe Fangsong Std}{
   \newCJKfontfamily[fangsong]\fs{Adobe Fangsong Std}
+  \setCJKmonofont{Adobe Fangsong Std}
 }{
   \newCJKfontfamily[fangsong]\fs{FandolFang} % TeX Live 自带仿宋
+  \setCJKmonofont{FandolFang}     % TeX Live 自带仿宋
 }
 \IfFontExistsTF{Adobe Heiti Std}{
   \newCJKfontfamily[hei]\hei{Adobe Heiti Std}
@@ -41,11 +43,6 @@
   \newCJKfontfamily[kai]\kai{Adobe Kaiti Std}
 }{
   \newCJKfontfamily[kai]\kai{FandolKai} % TeX Live 自带楷体
-}
-\IfFontExistsTF{Adobe Fangsong Std}{
-  \setCJKmonofont{Adobe Fangsong Std}
-}{
-  \setCJKmonofont{FandolFang}     % TeX Live 自带仿宋
 }
 % 英文字体回退：优先使用系统字体，不存在时回退到 TeX Live 自带的 TeX Gyre 字体
 \IfFontExistsTF{Times New Roman}{
