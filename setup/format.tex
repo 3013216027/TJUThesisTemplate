@@ -17,17 +17,49 @@
 \newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}                % 小五，单倍行距
 \newcommand{\liuhao}{\fontsize{7.5pt}{7.5pt}\selectfont}            % 六号，单倍行距
 % 如果需要添加新的字体定义，使用fc-list( :lang=zh-cn)可列出系统所有(中文)字体及对应名称
-\newCJKfontfamily[song]\song{Adobe Song Std}
-\newCJKfontfamily[fangsong]\fs{Adobe Fangsong Std}
-\newCJKfontfamily[hei]\hei{Adobe Heiti Std}
-\newCJKfontfamily[kai]\kai{Adobe Kaiti Std}
-% 其它字体定义
-\setCJKmainfont{Adobe Song Std}   % 中文衬线，正文主要字体
-\setCJKsansfont{Adobe Heiti Std}  % 中文无衬线，影响\sffamily和\textsf
-\setCJKmonofont{Adobe Heiti Std}  % 中文等宽，影响\ttfamily和\texttt
-\setmainfont{Times New Roman}     % 英文衬线
-\setsansfont{Times New Roman}     % 英文无衬线，影响\sffamily和\textsf
-\setmonofont{Times New Roman}     % 英文等宽，影响\ttfamily和\texttt
+% 跨平台字体回退：优先使用 Adobe 中文字体，不存在时回退到 TeX Live 自带的 Fandol 字体
+\IfFontExistsTF{Adobe Song Std}{
+  \newCJKfontfamily[song]\song{Adobe Song Std}
+  \setCJKmainfont{Adobe Song Std}
+}{
+  \newCJKfontfamily[song]\song{FandolSong}
+  \setCJKmainfont{FandolSong}     % TeX Live 自带宋体
+}
+\IfFontExistsTF{Adobe Fangsong Std}{
+  \newCJKfontfamily[fangsong]\fs{Adobe Fangsong Std}
+  \setCJKmonofont{Adobe Fangsong Std}
+}{
+  \newCJKfontfamily[fangsong]\fs{FandolFang} % TeX Live 自带仿宋
+  \setCJKmonofont{FandolFang}     % TeX Live 自带仿宋
+}
+\IfFontExistsTF{Adobe Heiti Std}{
+  \newCJKfontfamily[hei]\hei{Adobe Heiti Std}
+  \setCJKsansfont{Adobe Heiti Std}
+}{
+  \newCJKfontfamily[hei]\hei{FandolHei}
+  \setCJKsansfont{FandolHei}      % TeX Live 自带黑体
+}
+\IfFontExistsTF{Adobe Kaiti Std}{
+  \newCJKfontfamily[kai]\kai{Adobe Kaiti Std}
+}{
+  \newCJKfontfamily[kai]\kai{FandolKai} % TeX Live 自带楷体
+}
+% 英文字体回退：优先使用系统字体，不存在时回退到 TeX Live 自带的 TeX Gyre 字体
+\IfFontExistsTF{Times New Roman}{
+  \setmainfont{Times New Roman}   % 英文衬线
+}{
+  \setmainfont{TeX Gyre Termes}   % TeX Live 自带，兼容 Times New Roman
+}
+\IfFontExistsTF{Arial}{
+  \setsansfont{Arial}             % 英文无衬线
+}{
+  \setsansfont{TeX Gyre Heros}    % TeX Live 自带，兼容 Helvetica/Arial
+}
+\IfFontExistsTF{Courier New}{
+  \setmonofont{Courier New}       % 英文等宽
+}{
+  \setmonofont{TeX Gyre Cursor}   % TeX Live 自带，兼容 Courier
+}
 
 % \newcommand{\nocontentsline}[3]{}
 % \newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
@@ -46,11 +78,13 @@
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}  % 范数
 \newcommand{\inner}[1]{\langle #1 \rangle}  % 内积
 \newcommand{\abs}[1]{\lvert #1 \rvert}  % 绝对值
-\newcommand{\distance}[0]{\left\lVert\right.}  % 距离
+\newcommand{\distance}{\,\Vert\,}  % 距离/KL散度分隔符
 
 % 其它宏
 \newcommand{\todo}[1]{\textcolor{red}{\{TODO:#1\}}}  % \todo{} 生成红色字体的“TODO: ”，方便编写草稿时打标记。
 \newcommand*{\ldash}[0]{\raisebox{0.5mm}{\,-----\,}}  % 破折号
+\newlength{\wordsep}                                   % 公式注释后与正文的间距（用于 tabularx 注释表格后，如 tables.tex 中的 \vspace{\wordsep}）
+\setlength{\wordsep}{\baselineskip}
 
 % 算法环境
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -125,24 +159,21 @@
 \renewcommand{\figurename}{图}                                    % 插图题头
 \renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}       % 使图编号为 7-1 的格式 %\protect{~}
 \renewcommand{\thesubfigure}{\alph{subfigure})}                   % 使子图编号为 a) 的格式
-\renewcommand{\thesubtable}{(\alph{subtable})}                    % 使子表编号为 (a) 的格式
 \renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}         % 使表编号为 7-1 的格式
 \renewcommand{\theequation}{\arabic{chapter}-\arabic{equation}}   % 使公式编号为 7-1 的格式
 
 %%%%%% 定制浮动图形和表格标题样式 %%%%%%
-\makeatletter
-\long\def\@makecaption#1#2{
-   \vskip\abovecaptionskip
-   \sbox\@tempboxa{\centering\wuhao\song{#1\qquad #2} }
-   \ifdim \wd\@tempboxa >\hsize
-     \centering\wuhao\song{#1\qquad #2} \par
-   \else
-     \global \@minipagefalse
-     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
-   \fi
-   \vskip\belowcaptionskip}
-\makeatother
-\captiondelim{~~~~} %用来控制longtable表头分隔符
+% 使用 caption 宏包统一设置标题格式（替代手动重定义 \@makecaption）
+\DeclareCaptionFont{wuhao}{\wuhao}
+\DeclareCaptionFont{songti}{\song}
+\captionsetup{
+  font={wuhao,songti},
+  labelsep=quad,
+  justification=centering,
+  format=plain
+}
+\captionsetup[subfigure]{labelformat=simple}  % 子图标签格式
+\captionsetup[longtable]{labelsep=quad}       % longtable 标签分隔符
 
 %%%%%%%%%% Theorem Environment %%%%%%%%%%%%%%%%%
 \theoremstyle{plain}
@@ -263,15 +294,15 @@
 
   \vspace*{42pt}
   \setlength{\@title@width}{8cm}
-  {\sanhao\song{\bf{
+  {\sanhao\song\bfseries
   \begin{tabular}{lc}
     学\qquad 院&  \underline{\makebox[\@title@width][c]{\@caffil}} \\
     专\qquad 业 &  \underline{\makebox[\@title@width][c]{\@csubject}} \\
     年\qquad 级  &  \underline{\makebox[\@title@width][c]{\@cgrade}}\\
     姓\qquad 名 &  \underline{\makebox[\@title@width][c]{\@cauthor}} \\
     指导教师 &  \underline{\makebox[\@title@width][c]{\@csupervisor}} \\
-  \end{tabular}}}
- }
+  \end{tabular}
+  }
   \vspace*{21pt}
 
 \song\sanhao{\textbf{\@cdate}}

@@ -106,12 +106,23 @@ $\mathrm{i}$、 $\mathrm{j}$~———虚数单位 & $\piup$———圆周率\\
 
 \begin{figure}[htbp]
 \centering
-\subfigure[由~\LaTeX~系统生成的行内公式]{\label{fig:subfig:latex}
-                \fbox{\includegraphics[width=0.55\textwidth]{latex}}}
-\subfigure[由~Word软件生成的~.doc~格式行内公式]{\label{fig:subfig:word}
-                \fbox{\includegraphics[width=0.55\textwidth]{word}}}
-\subfigure[由~Word软件生成的~.pdf~格式行内公式]{\label{fig:subfig:pdf}
-                \fbox{\includegraphics[width=0.55\textwidth]{pdf}}}
+\begin{subfigure}[b]{0.55\textwidth}
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{latex}}
+  \caption{由~\LaTeX~系统生成的行内公式}\label{fig:subfig:latex}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.55\textwidth}
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{word}}
+  \caption{由~Word软件生成的~.doc~格式行内公式}\label{fig:subfig:word}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.55\textwidth}
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{pdf}}
+  \caption{由~Word软件生成的~.pdf~格式行内公式}\label{fig:subfig:pdf}
+\end{subfigure}
 
 \caption{由~\LaTeX~和~Word~生成的~3~种行内公式屏显效果}\label{fig:hangju}
 \vspace{-1em}
